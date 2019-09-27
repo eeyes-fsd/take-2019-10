@@ -13,4 +13,9 @@ $api = app('Dingo\Api\Routing\Router');
 |
 */
 
-//
+$api->version('v1', [
+    'namespace' => 'App\Http\Controllers\Api',
+    'middleware' => ['binds']
+], function ($api) {
+    //
+});
