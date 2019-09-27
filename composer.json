@@ -9,10 +9,12 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "dingo/api": "^2.3",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0",
-        "laravel/ui": "^1.0"
+        "laravel/ui": "^1.0",
+        "tymon/jwt-auth": "^1.0.0-rc5"
     },
     "require-dev": {
         "facade/ignition": "^1.4",
