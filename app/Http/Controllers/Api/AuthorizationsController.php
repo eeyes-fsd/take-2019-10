@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,7 @@ class AuthorizationsController extends Controller
 
         $miniProgram = \EasyWeChat::miniProgram();
 
-        $response = $miniProgram->auth()->session($code);
+        $response = $miniProgram->auth->session($code);
 
         if (isset($data['errcode'])) {
             return $this->response->errorUnauthorized('code 错误');

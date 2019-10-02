@@ -15,15 +15,15 @@ $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', [
     'namespace' => 'App\Http\Controllers\Api',
-    'middleware' => ['binds']
+    'middleware' => ['bindings']
 ], function ($api) {
     $api->group([
         'middleware' => 'api.throttle',
         'limit' => config('api.rate_limits.sign.limit'),
         'expires' => config('api.rate_limits.sign.expires')
     ], function ($api) {
-        $api->put('authorizations/current', 'AuthorizationsController@refresh')
-            ->name('api.authorizations.refresh');
+        $api->put('authorizations/current', 'AuthorizationsController@update')
+            ->name('api.authorizations.update');
 
         $api->post('weapp/authorizations', 'AuthorizationsController@socialStore')
             ->name('api.weapp.authorizations.store');
