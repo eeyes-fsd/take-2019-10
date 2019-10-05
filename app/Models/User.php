@@ -38,13 +38,29 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * @return array
+     */
     public function getJWTCustomClaims()
     {
         return [];
     }
 
+    /**
+     * @return mixed
+     */
     public function getJWTIdentifier()
     {
         return $this->getKey();
+    }
+
+    /**
+     * 定义对应关系
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function addresses()
+    {
+        return $this->hasMany('App\Models\Address', 'user_id');
     }
 }

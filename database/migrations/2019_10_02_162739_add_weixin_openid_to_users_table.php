@@ -26,7 +26,7 @@ class AddWeixinOpenidToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('user', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('weapp_openid');
             $table->dropColumn('weixin_session_key');
         });
