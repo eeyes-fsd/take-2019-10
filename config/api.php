@@ -186,6 +186,18 @@ return [
 
     ],
 
+    'rate_limits' => [
+        'sign' => [
+            'limit' => env('API_SIGN_LIMIT', 60),
+            'expires' => env('API_SIGN_LIMIT_EXPIRES', 1),
+        ],
+
+        'access' => [
+            'limit' => env('API_ACCESS_LIMIT', 60),
+            'expires' => env('API_ACCESS_LIMIT_EXPIRES', 1),
+        ],
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Response Transformer
@@ -227,18 +239,6 @@ return [
             'indent_size' => env('API_JSON_FORMAT_INDENT_SIZE', 2),
         ],
 
-    ],
-
-    'rate_limits' => [
-        'sign' => [
-            'limit' => env('API_SIGN_LIMIT', 60),
-            'expires' => env('API_SIGN_LIMIT_EXPIRES', 1),
-        ],
-
-        'access' => [
-            'limit' => env('API_ACCESS_LIMIT', 60),
-            'expires' => env('API_ACCESS_LIMIT_EXPIRES', 1),
-        ],
     ],
 
 ];
