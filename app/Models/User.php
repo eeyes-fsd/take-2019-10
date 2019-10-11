@@ -63,4 +63,14 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany('App\Models\Address', 'user_id');
     }
+
+    /**
+     * 定义用户与区块关系
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function unit()
+    {
+        return $this->belongsTo('App\Models\Unit', 'unit_id');
+    }
 }

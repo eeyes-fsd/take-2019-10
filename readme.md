@@ -17,6 +17,7 @@ See [CHANGELOG.md]
     PDO PHP Extension   
     Tokenizer PHP Extension   
     XML PHP Extension  
+    Redis PHP Extension
      
 ### 部署流程
 1.复制 `.env.example` 到 `.env`   
