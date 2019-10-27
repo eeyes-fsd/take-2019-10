@@ -42,6 +42,7 @@ $api->version('v1', [
         ], function ($api) {
             /** 需要登录认证的API */
 
+            /** 送货地址路由 */
             $api->get('addresses', 'AddressesController@index')
                 ->name('api.addresses.index');
             $api->get('addresses/{address}', 'AddressesController@show')
@@ -53,12 +54,17 @@ $api->version('v1', [
             $api->delete('addresses/{address}', 'AddressesController@destroy')
                 ->name('api.addresses.destroy');
 
+            /** 用户路由 */
             $api->get('user', 'UsersController@show')
                 ->name('api.user.show');
             $api->put('user', 'UsersController@update')
                 ->name('api.user.update');
             $api->delete('user', 'UsersController@destroy')
                 ->name('api.user.destroy');
+
+            /** 图片资源路由 */
+            $api->post('images', 'ImagesController@store')
+                ->name('api.images.store');
         });
     });
 });

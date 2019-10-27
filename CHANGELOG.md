@@ -2,6 +2,11 @@
 ## [Unreleased]
 - 完成全部API与基本功能   
 
+## [0.0.6] - 2019-10-27
+### Added
+- 添加图片上传接口
+- 添加 [spatie/laravel-permission](https://packagist.org/packages/spatie/laravel-permission) 包
+
 ## [0.0.5] - 2019-10-11
 ### Added
 - 添加区域类以区分范围

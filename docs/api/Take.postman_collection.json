@@ -620,6 +620,62 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Images",
+			"item": [
+				{
+					"name": "上传图片",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC90YWtlLmRldi5sb2NhbCIsImlhdCI6MTU3MjEzODUyNCwiZXhwIjoxNTcyMjI0OTI0LCJuYmYiOjE1NzIxMzg1MjQsImp0aSI6Ikt2T0xUZmFVdGtVR01UYUoiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.oi_-usNs4lT7AqTeWVcMw1VOTR9t6tzBzd_2mEXM0II",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "type",
+									"value": "avatar",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/home/sxxuz/Downloads/th.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_host}}/images",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"images"
+							]
+						},
+						"description": "请求此接口以上传图片，必须提供 Authorizations 请求头。\ntype 字段可用 'avatar', 'commodity'.\n分辨率必须大于 200×200.\n图片地址在响应头中返回。"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"protocolProfileBehavior": {}
