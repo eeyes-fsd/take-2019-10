@@ -8,6 +8,13 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
+/**
+ * Class User
+ * @package App\Models
+ *
+ * @property int $id
+ * @property
+ */
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
@@ -75,5 +82,15 @@ class User extends Authenticatable implements JWTSubject
     public function unit()
     {
         return $this->belongsTo('App\Models\Unit', 'unit_id');
+    }
+
+    /**
+     * 定义用户与订单关系
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function orders()
+    {
+        return $this->hasMany('App\Models\Order', 'user_id');
     }
 }

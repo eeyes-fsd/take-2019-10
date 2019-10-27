@@ -2,10 +2,20 @@
 ## [Unreleased]
 - 完成全部API与基本功能   
 
+## [0.0.7] - 2019-10-27
+### Added
+- 添加订单类  
+- 添加订单接口  
+- 添加订单预支付处理器  
+- 添加返回值未验证异常  
+- 添加订单与地址、用户的所属关系  
+### Fixed
+- 图片上传允许 bmp 格式  
+
 ## [0.0.6] - 2019-10-27
 ### Added
-- 添加图片上传接口
-- 添加 [spatie/laravel-permission](https://packagist.org/packages/spatie/laravel-permission) 包
+- 添加图片上传接口  
+- 添加 [spatie/laravel-permission](https://packagist.org/packages/spatie/laravel-permission) 包  
 
 ## [0.0.5] - 2019-10-11
 ### Added

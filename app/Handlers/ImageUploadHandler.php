@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 
 class ImageUploadHandler
 {
-    protected $allowed_ext = ['jpeg', 'jpg', 'png', 'gif'];
+    protected $allowed_ext = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
 
     public function save($file, $folder, $file_prefix, $max_width=false)
     {

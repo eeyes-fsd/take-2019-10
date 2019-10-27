@@ -65,6 +65,20 @@ $api->version('v1', [
             /** 图片资源路由 */
             $api->post('images', 'ImagesController@store')
                 ->name('api.images.store');
+
+            /** 订单路由 */
+            $api->get('orders', 'OrdersController@index')
+                ->name('api.orders.index');
+            $api->get('orders/{order}', 'OrdersController@show')
+                ->name('api.orders.show');
+            $api->post('orders', 'OrdersController@store')
+                ->name('api.orders.store');
+            $api->put('orders/{order}', 'OrdersController@update')
+                ->name('api.orders.update');
+            $api->delete('orders/{order}', 'OrdersController@destroy')
+                ->name('api.orders.delete');
+            $api->get('orders/{order}/callback', 'OrdersController@callback')
+                ->name('api.orders.callback');
         });
     });
 });
