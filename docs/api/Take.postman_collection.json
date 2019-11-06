@@ -1,0 +1,1112 @@
+{
+	"info": {
+		"_postman_id": "f8ae3fe7-a23b-477e-99c0-51800277bcf4",
+		"name": "Take",
+		"description": "交大外卖小程序 API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "认证",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"code\": \"{code}\"\n}"
+						},
+						"url": {
+							"raw": "{{api_host}}/weapp/authorizations",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"weapp",
+								"authorizations"
+							]
+						},
+						"description": "使用前端的 Code 获取用户信息，换取 Token 。"
+					},
+					"response": []
+				},
+				{
+					"name": "刷新",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC90YWtlLmRldi5sb2NhbFwvYXBpXC9hdXRob3JpemF0aW9uc1wvY3VycmVudCIsImlhdCI6MTU3MDMzMjcyNiwiZXhwIjoxNTcwNDE5MTM1LCJuYmYiOjE1NzAzMzI3MzUsImp0aSI6IkczczJZQWVMMGVBdldrZFciLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.W9O4IK6t7X8peuTBqee9Q--bOxbBdgtIDUjcOEbLLNc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{api_host}}/authorizations/current",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"authorizations",
+								"current"
+							]
+						},
+						"description": "在 Token 过期后一段时间可以通过此接口换取新的 Token ，需要 Auth 头以认证。"
+					},
+					"response": [
+						{
+							"name": "刷新",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{api_host}}/authorizations/current",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"authorizations",
+										"current"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.16.1"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "private, must-revalidate"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 02 Oct 2019 09:18:50 GMT"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1570007990"
+								},
+								{
+									"key": "ETag",
+									"value": "\"4bcd26bc7c6afbd22e8ce87df5e42bd694bd7a62\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC90YWtlLmRldi5sb2NhbFwvYXBpXC9hdXRob3JpemF0aW9uc1wvY3VycmVudCIsImlhdCI6MTU3MDAwNzkxMywiZXhwIjoxNTcwMDk0MzMwLCJuYmYiOjE1NzAwMDc5MzAsImp0aSI6IjAyVGIyTExSZzZKbWZ5NjQiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.j2PdBtXxpSNbzw-TICgLW2KuhySBU-uAgNLgZUFAlsM\",\n    \"token_type\": \"Bearer\",\n    \"expires_in\": 86400\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "获取用户信息",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC90YWtlLmRldi5sb2NhbFwvYXBpXC9hdXRob3JpemF0aW9uc1wvY3VycmVudCIsImlhdCI6MTU3MDMzMjcyNiwiZXhwIjoxNTcwNDE5MTM1LCJuYmYiOjE1NzAzMzI3MzUsImp0aSI6IkczczJZQWVMMGVBdldrZFciLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.W9O4IK6t7X8peuTBqee9Q--bOxbBdgtIDUjcOEbLLNc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_host}}/user",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"user"
+							]
+						},
+						"description": "请求此接口以获取当前用户信息，使用 Authorization 头确认身份。"
+					},
+					"response": [
+						{
+							"name": "获取用户信息",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_host}}/user",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.16.1"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "private, must-revalidate"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 06 Oct 2019 05:30:50 GMT"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1570339910"
+								},
+								{
+									"key": "ETag",
+									"value": "\"0da9c084c0db0dedc2f7a3121253b2f3fd003a0c\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"sxxuz\",\n        \"phone\": \"15129877128\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "更新用户信息",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC90YWtlLmRldi5sb2NhbFwvYXBpXC9hdXRob3JpemF0aW9uc1wvY3VycmVudCIsImlhdCI6MTU3MDMzMjcyNiwiZXhwIjoxNTcwNDE5MTM1LCJuYmYiOjE1NzAzMzI3MzUsImp0aSI6IkczczJZQWVMMGVBdldrZFciLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.W9O4IK6t7X8peuTBqee9Q--bOxbBdgtIDUjcOEbLLNc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"NewName\",\n\t\"phone\": \"18991782222\"\n}"
+						},
+						"url": {
+							"raw": "{{api_host}}/user",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"user"
+							]
+						},
+						"description": "请求此接口以更新当前用户信息，name与phone为必填项。必须提供Authorization头以认证。"
+					},
+					"response": []
+				},
+				{
+					"name": "注销当前用户",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC90YWtlLmRldi5sb2NhbFwvYXBpXC9hdXRob3JpemF0aW9uc1wvY3VycmVudCIsImlhdCI6MTU3MDMzMjcyNiwiZXhwIjoxNTcwNDE5MTM1LCJuYmYiOjE1NzAzMzI3MzUsImp0aSI6IkczczJZQWVMMGVBdldrZFciLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.W9O4IK6t7X8peuTBqee9Q--bOxbBdgtIDUjcOEbLLNc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_host}}/user",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"user"
+							]
+						},
+						"description": "请求此接口以注销当前用户，这将删除当前用户在数据库中的记录。必须提供Authorization头以认证。"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Addresses",
+			"item": [
+				{
+					"name": "创建收货地址",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC90YWtlLmRldi5sb2NhbFwvYXBpXC9hdXRob3JpemF0aW9uc1wvY3VycmVudCIsImlhdCI6MTU3MDMzMjcyNiwiZXhwIjoxNTcwNDE5MTM1LCJuYmYiOjE1NzAzMzI3MzUsImp0aSI6IkczczJZQWVMMGVBdldrZFciLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.W9O4IK6t7X8peuTBqee9Q--bOxbBdgtIDUjcOEbLLNc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"XuZhixuan\",\n\t\"gender\": \"m\",\n\t\"phone\": \"15129877128\",\n\t\"details\": \"文治书院西19-0625\"\n}"
+						},
+						"url": {
+							"raw": "{{api_host}}/addresses",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"addresses"
+							]
+						},
+						"description": "请求此接口以创建新的收货地址，必须提供Authorization头以认证"
+					},
+					"response": []
+				},
+				{
+					"name": "获取收货信息",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC90YWtlLmRldi5sb2NhbFwvYXBpXC9hdXRob3JpemF0aW9uc1wvY3VycmVudCIsImlhdCI6MTU3MDMzMjcyNiwiZXhwIjoxNTcwNDE5MTM1LCJuYmYiOjE1NzAzMzI3MzUsImp0aSI6IkczczJZQWVMMGVBdldrZFciLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.W9O4IK6t7X8peuTBqee9Q--bOxbBdgtIDUjcOEbLLNc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_host}}/addresses",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"addresses"
+							]
+						},
+						"description": "请求此接口以获取用户全部收货信息，必须提供Authorization头以认证。"
+					},
+					"response": [
+						{
+							"name": "获取收货信息",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_host}}/addresses",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"addresses"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.16.1"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "private, must-revalidate"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 06 Oct 2019 05:29:14 GMT"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1570339806"
+								},
+								{
+									"key": "ETag",
+									"value": "\"41216b1e8a39554830a5b0282c3edddfc97bb5b8\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"许志轩\",\n            \"phone\": \"15129877128\",\n            \"details\": \"文治书院 西19-0625\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"XuZhixuan\",\n            \"phone\": \"15129877128\",\n            \"details\": \"文治书院西19-0625\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "获取某个收货信息",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC90YWtlLmRldi5sb2NhbFwvYXBpXC9hdXRob3JpemF0aW9uc1wvY3VycmVudCIsImlhdCI6MTU3MDMzMjcyNiwiZXhwIjoxNTcwNDE5MTM1LCJuYmYiOjE1NzAzMzI3MzUsImp0aSI6IkczczJZQWVMMGVBdldrZFciLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.W9O4IK6t7X8peuTBqee9Q--bOxbBdgtIDUjcOEbLLNc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_host}}/addresses/2",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"addresses",
+								"2"
+							]
+						},
+						"description": "请求此接口以获取某个收货信息，必须提供Authorization头以认证"
+					},
+					"response": [
+						{
+							"name": "获取某个收货信息",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_host}}/addresses/2",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"addresses",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.16.1"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "private, must-revalidate"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 06 Oct 2019 05:41:42 GMT"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "57"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1570340536"
+								},
+								{
+									"key": "ETag",
+									"value": "\"48160d27844f59de5605f5e4109dcf54f9299454\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 2,\n        \"name\": \"XuZhixuan\",\n        \"phone\": \"15129877128\",\n        \"details\": \"文治书院西19-0625\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "更新收货信息",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC90YWtlLmRldi5sb2NhbFwvYXBpXC9hdXRob3JpemF0aW9uc1wvY3VycmVudCIsImlhdCI6MTU3MDMzMjcyNiwiZXhwIjoxNTcwNDE5MTM1LCJuYmYiOjE1NzAzMzI3MzUsImp0aSI6IkczczJZQWVMMGVBdldrZFciLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.W9O4IK6t7X8peuTBqee9Q--bOxbBdgtIDUjcOEbLLNc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"XuZhixuan\",\n\t\"gender\": \"m\",\n\t\"phone\": \"15129877128\",\n\t\"details\": \"文治书院西19-0530\"\n}"
+						},
+						"url": {
+							"raw": "{{api_host}}/addresses/2",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"addresses",
+								"2"
+							]
+						},
+						"description": "请求此接口以更新信息，必须提供全部字段，必须提供Authorization头以认证。"
+					},
+					"response": []
+				},
+				{
+					"name": "删除收货地址",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC90YWtlLmRldi5sb2NhbFwvYXBpXC9hdXRob3JpemF0aW9uc1wvY3VycmVudCIsImlhdCI6MTU3MDMzMjcyNiwiZXhwIjoxNTcwNDE5MTM1LCJuYmYiOjE1NzAzMzI3MzUsImp0aSI6IkczczJZQWVMMGVBdldrZFciLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.W9O4IK6t7X8peuTBqee9Q--bOxbBdgtIDUjcOEbLLNc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_host}}/addresses/2",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"addresses",
+								"2"
+							]
+						},
+						"description": "请求此接口以删除某个收货地址，必须提供Authorization头以认证。"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Images",
+			"item": [
+				{
+					"name": "上传图片",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3QiLCJpYXQiOjE1NzMwMjA4OTEsImV4cCI6MTU3MzEwNzI5MSwibmJmIjoxNTczMDIwODkxLCJqdGkiOiJnVmVUU0JNcnVBVTI0dmZpIiwic3ViIjoxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM\n0MDA4NzJkYjdhNTk3NmY3In0.gsFBHYulOWbcVmOGzdl6bcEly_db4YZ3JR4QTj-PEvw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "type",
+									"value": "commodity",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/home/sxxuz/Downloads/th.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_host}}/images",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"images"
+							]
+						},
+						"description": "请求此接口以上传图片，必须提供 Authorizations 请求头。\ntype 字段可用 'avatar', 'commodity'.\n分辨率必须大于 200×200.\n图片地址在响应头中返回。"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Commodities",
+			"item": [
+				{
+					"name": "商品列表",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_host}}/commodities",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"commodities"
+							]
+						},
+						"description": "请求此接口获取商品列表，无需认证"
+					},
+					"response": []
+				},
+				{
+					"name": "获取商品详情",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_host}}/commodities/{id}",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"commodities",
+								"{id}"
+							]
+						},
+						"description": "请求此接口获取商品详情。无需认证"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "创建订单",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3QiLCJpYXQiOjE1NzMwMjA4OTEsImV4cCI6MTU3MzEwNzI5MSwibmJmIjoxNTczMDIwODkxLCJqdGkiOiJnVmVUU0JNcnVBVTI0dmZpIiwic3ViIjoxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.gsFBHYulOWbcVmOGzdl6bcEly_db4YZ3JR4QTj-PEvw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"details\":{\n\t\t\"1\":10\n\t},\n\t\"address_id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/orders",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"orders"
+							]
+						},
+						"description": "请求此接口以创建订单，需要提供 Authorizaitons 头以认证。details 对象数组中键为商品ID，值为商品数量。"
+					},
+					"response": []
+				},
+				{
+					"name": "取消订单",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3QiLCJpYXQiOjE1NzMwMjA4OTEsImV4cCI6MTU3MzEwNzI5MSwibmJmIjoxNTczMDIwODkxLCJqdGkiOiJnVmVUU0JNcnVBVTI0dmZpIiwic3ViIjoxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.gsFBHYulOWbcVmOGzdl6bcEly_db4YZ3JR4QTj-PEvw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api_host}}/orders/{id}",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"orders",
+								"{id}"
+							]
+						},
+						"description": "请求此接口以取消订单，已支付的订单暂时无法取消。需提供 Authorizations 头以认证。"
+					},
+					"response": [
+						{
+							"name": "取消订单",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{api_host}}/orders/{id}",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"orders",
+										"{id}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 06 Nov 2019 08:55:40 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 06 Nov 2019 08:55:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "private, must-revalidate"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=UTF-8"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1573030595"
+								},
+								{
+									"key": "ETag",
+									"value": "\"da39a3ee5e6b4b0d3255bfef95601890afd80709\""
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "查看所有订单",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3QiLCJpYXQiOjE1NzMwMjA4OTEsImV4cCI6MTU3MzEwNzI5MSwibmJmIjoxNTczMDIwODkxLCJqdGkiOiJnVmVUU0JNcnVBVTI0dmZpIiwic3ViIjoxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.gsFBHYulOWbcVmOGzdl6bcEly_db4YZ3JR4QTj-PEvw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_host}}/orders",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"orders"
+							]
+						},
+						"description": "请求此接口查看所有当前用户订单。\nStatus：\n0 --- 未完成预支付\n1 --- 已完成预支付\n2 --- 已完成支付\n3 --- 已开始配送\n4 --- 已送达"
+					},
+					"response": []
+				},
+				{
+					"name": "查看订单详情",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3QiLCJpYXQiOjE1NzMwMjA4OTEsImV4cCI6MTU3MzEwNzI5MSwibmJmIjoxNTczMDIwODkxLCJqdGkiOiJnVmVUU0JNcnVBVTI0dmZpIiwic3ViIjoxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.gsFBHYulOWbcVmOGzdl6bcEly_db4YZ3JR4QTj-PEvw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_host}}/orders/{id}",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"orders",
+								"{id}"
+							]
+						},
+						"description": "请求此接口以查看订单详情，需提供 Authorizations 头以认证。"
+					},
+					"response": [
+						{
+							"name": "查看订单详情",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_host}}/orders/2",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"orders",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 06 Nov 2019 10:56:02 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 06 Nov 2019 10:56:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "private, must-revalidate"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "57"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1573037793"
+								},
+								{
+									"key": "ETag",
+									"value": "\"412d2e692cb623fb773a5ad913035da5be892175\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 2,\n        \"no\": \"91ee05c0-0073-11ea-924d-00155deb58cc\",\n        \"status\": 0,\n        \"details\": [\n            {\n                \"id\": 1,\n                \"price\": 20,\n                \"amount\": 10,\n                \"subtotal\": 200\n            }\n        ],\n        \"address\": null,\n        \"created_at\": \"2019-11-06\",\n        \"updated_at\": \"2019-11-06\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "修改订单信息",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3QiLCJpYXQiOjE1NzMwMjA4OTEsImV4cCI6MTU3MzEwNzI5MSwibmJmIjoxNTczMDIwODkxLCJqdGkiOiJnVmVUU0JNcnVBVTI0dmZpIiwic3ViIjoxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.gsFBHYulOWbcVmOGzdl6bcEly_db4YZ3JR4QTj-PEvw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"address_id\":2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/orders/{id}",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"orders",
+								"{id}"
+							]
+						},
+						"description": "请求此接口以修改订单信息。目前仅支持修改配送信息，且无法在配送中时修改。"
+					},
+					"response": [
+						{
+							"name": "修改订单信息",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"address_id\":2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api_host}}/orders/2",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"orders",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 06 Nov 2019 11:03:03 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 06 Nov 2019 11:03:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "private, must-revalidate"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=UTF-8"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1573038242"
+								},
+								{
+									"key": "ETag",
+									"value": "\"da39a3ee5e6b4b0d3255bfef95601890afd80709\""
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

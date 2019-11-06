@@ -5,10 +5,21 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+/**
+ * Class User
+ * @package App\Models
+ *
+ * @property int $id
+ * @property
+ */
+class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
+
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +27,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'phone', 'password', 'weapp_openid', 'weixin_session_key'
     ];
 
     /**
@@ -36,4 +47,50 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * 定义对应关系
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function addresses()
+    {
+        return $this->hasMany('App\Models\Address', 'user_id');
+    }
+
+    /**
+     * 定义用户与区块关系
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function unit()
+    {
+        return $this->belongsTo('App\Models\Unit', 'unit_id');
+    }
+
+    /**
+     * 定义用户与订单关系
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function orders()
+    {
+        return $this->hasMany('App\Models\Order', 'user_id');
+    }
 }
