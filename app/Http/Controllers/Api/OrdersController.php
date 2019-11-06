@@ -9,6 +9,7 @@ use App\Handlers\PrePayHandler;
 use App\Transformers\OrderTransformer;
 use App\Http\Requests\Api\OrderRequest;
 use App\Exceptions\ResponseUnverifiedException;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class OrdersController extends Controller
@@ -16,10 +17,13 @@ class OrdersController extends Controller
     /**
      * @param Request $request
      * @return \Dingo\Api\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index(Request $request)
     {
         $orders = $request->user()->orders;
+
+        $this->authorize('show', $orders->first());
 
         return $this->response->collection($orders, new OrderTransformer('collection'));
     }
@@ -27,9 +31,12 @@ class OrdersController extends Controller
     /**
      * @param Order $order
      * @return \Dingo\Api\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function show(Order $order)
     {
+        $this->authorize('show', $order);
+
         return $this->response->item($order, new OrderTransformer('item'));
     }
 
@@ -39,6 +46,7 @@ class OrdersController extends Controller
      * @return \Dingo\Api\Http\Response
      * @throws \App\Exceptions\ResponseUnverifiedException
      * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Exception
      */
     public function store(OrderRequest $request, PrePayHandler $handler)
     {
@@ -47,9 +55,11 @@ class OrdersController extends Controller
         foreach ($request->details as $commodity => $amount)
         {
             $commodity = Commodity::find($commodity);
+            $commodity->sales += $amount;
+            $commodity->save();
             $subtotal = $amount * $commodity->price;
             $temp = [
-                'name' => $commodity->id,
+                'id' => $commodity->id,
                 'price' => $commodity->price,
                 'amount' => $amount,
                 'subtotal' => $subtotal,
@@ -63,6 +73,7 @@ class OrdersController extends Controller
         $attributes['details'] = $details;
         $attributes['status'] = 0;
         $attributes['fee'] = $fee;
+        $attributes['no'] = Uuid::uuid1();
 
         $order = Order::create($attributes);
 
@@ -71,15 +82,23 @@ class OrdersController extends Controller
             abort(500);
         }
 
-        $order->update(['status' => 2]);
+        $order->update(['status' => 1]);
 
         return $this->response->created(route('api.orders.show', $order->id))->array([
             $response
         ]);
     }
 
+    /**
+     * @param Order $order
+     * @param OrderRequest $request
+     * @return \Dingo\Api\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function update(Order $order, OrderRequest $request)
     {
+        $this->authorize('update', $order);
+
         if ($order->status === 3)
         {
             abort(400, '已配送无法更改地址');
@@ -92,8 +111,15 @@ class OrdersController extends Controller
         return $this->response->noContent()->setStatusCode(200);
     }
 
+    /**
+     * @param Order $order
+     * @return \Dingo\Api\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function destroy(Order $order)
     {
+        $this->authorize('delete', $order);
+
         if ($order->status === 2)
         {
             throw new BadRequestHttpException('已支付订单不可删除');
@@ -103,6 +129,11 @@ class OrdersController extends Controller
         return $this->response->noContent()->setStatusCode(200);
     }
 
+    /**
+     * @param Order $order
+     * @param Request $request
+     * @return mixed
+     */
     public function callback(Order $order, Request $request)
     {
         if ($request->return_code !== 'SUCCESS')

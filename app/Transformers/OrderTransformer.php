@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Transformers;
-
 
 use App\Models\Order;
 use League\Fractal\TransformerAbstract;

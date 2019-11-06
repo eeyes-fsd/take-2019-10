@@ -51,10 +51,9 @@ class Order extends Model
 
     /**
      * @param array $details
-     * @return string
      */
     public function setDetailsAttribute(array $details)
     {
-        return serialize($details);
+        $this->attributes['details'] = serialize($details);
     }
 }

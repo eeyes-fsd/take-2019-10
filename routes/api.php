@@ -36,6 +36,11 @@ $api->version('v1', [
     ], function ($api) {
         /** 无需登录认证的接口 */
 
+        /** 商品路由 */
+        $api->get('commodities', 'CommoditiesController@index')
+            ->name('api.commodities.index');
+        $api->get('commodities/{commodity}', 'CommoditiesController@show')
+            ->name('api.commodities.show');
 
         $api->group([
             'middleware' => 'api.auth'

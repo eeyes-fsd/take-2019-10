@@ -23,10 +23,22 @@ class OrderRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'details' => 'required|array',
-            'address_id' => 'required|int',
-        ];
+        switch ($this->method())
+        {
+            case 'POST':
+                return [
+                    'details' => 'required|array',
+                    'address_id' => 'required|int',
+                ];
+
+            case 'PUT':
+                return [
+                    'address_id' => 'required|int',
+                ];
+
+            default:
+                abort(405);
+        }
     }
 
     public function messages()

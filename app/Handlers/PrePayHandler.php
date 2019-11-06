@@ -2,9 +2,11 @@
 
 namespace App\Handlers;
 
+use Illuminate\Support\Facades\Log;
 use App\Models\Order;
 use App\Models\User;
 use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Str;
 use App\Exceptions\ResponseUnverifiedException;
 
@@ -26,24 +28,46 @@ class PrePayHandler
             'body' => "eTake 交大外卖订单",
             'mch_id' => config('wechat.payment.default.mch_id'),
             'nonce_str' => Str::random(16),
-            'notify_url' => route('api.orders.callback'),
+            'notify_url' => app('Dingo\Api\Routing\UrlGenerator')->version('v1')->route('api.orders.callback', $order->id),
             'openid' => $user->openid,
-            'out_trade_no' => $this->order->no,
+            'out_trade_no' => $order->no->getHex(),
             'spbill_create_ip' => config('app.ip'),
-            'total_fee' => $this->order->fee,
+            'total_fee' => $order->fee,
             'trade_type' => 'JSAPI'
         ];
 
-        $params = http_build_query($params);
+        $query_clause = http_build_query($params) . '&key=' . config('wechat.payment.default.key');
+        $params['sign'] = strtoupper(md5($query_clause));
 
-        $params = $params . '&sign=' . md5($params);
+        $xml = '<xml>';
+        foreach ($params as $key => $param)
+        {
+            $xml .= "<" . $key . ">" . $param . "</" . $key . ">";
+        }
+        $xml .= '</xml>';
 
-        $response = $client->request(config('wechat.payment.default.request_url'), $params);
+        $request = new Request(
+            'POST',
+            config('wechat.payment.default.request_url'),
+            ['Content-Type' => 'text/xml'],
+            $xml
+        );
 
-        $data = json_decode($response->getBody());
+        $response = $client->send($request);
+
+        $data = str_replace(['<![CDATA[', ']]>'], '', (string)$response->getBody());
+        $data = simplexml_load_string($data);
+        $data = json_encode($data);
+        $data = json_decode($data, true);
 
         if ($data['return_code'] !== 'SUCCESS')
         {
+            Log::error("预支付接口调用失败 通信错误", [
+                'Request' => $params,
+                'Response' => $data,
+                'Order' => $order->id,
+                'User' => $user->id
+            ]);
             return false;
         }
 
@@ -53,6 +77,12 @@ class PrePayHandler
 
         if ($data['result_code'] !== 'SUCCESS')
         {
+            Log::error("预支付接口调用失败 支付错误", [
+                'Request' => (string)$request,
+                'Response' => (string)$response,
+                'Order' => $order->id,
+                'User' => $user->id
+            ]);
             return false;
         }
 
