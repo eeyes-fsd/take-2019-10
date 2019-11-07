@@ -15,7 +15,7 @@ class CommoditiesController extends Controller
     public function index()
     {
         $commodities = Commodity::all();
-        return $this->response->collection($commodities, new CommodityTransformer());
+        return $this->response->collection($commodities, new CommodityTransformer('collection'));
     }
 
     /**
@@ -24,6 +24,6 @@ class CommoditiesController extends Controller
      */
     public function show(Commodity $commodity)
     {
-        return $this->response->item($commodity, new CommodityTransformer());
+        return $this->response->item($commodity, new CommodityTransformer('item'));
     }
 }

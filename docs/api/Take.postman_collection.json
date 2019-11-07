@@ -679,7 +679,75 @@
 						},
 						"description": "请求此接口获取商品列表，无需认证"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "商品列表",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_host}}/commodities",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"commodities"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 Nov 2019 16:00:43 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 Nov 2019 16:00:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "private, must-revalidate"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1573142503"
+								},
+								{
+									"key": "ETag",
+									"value": "\"7fe0d101314fa47510fc868116eea752972506b0\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"水果套餐\",\n            \"price\": 20,\n            \"photo\": \"http://localhost/storage/uploads/images/commodities/201911/06/1_1573022679_7sR2dpEDxX.jpg\"\n        }\n    ]\n}"
+						}
+					]
 				},
 				{
 					"name": "获取商品详情",
@@ -698,7 +766,76 @@
 						},
 						"description": "请求此接口获取商品详情。无需认证"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "获取商品详情",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_host}}/commodities/1",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"commodities",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 Nov 2019 16:00:56 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 Nov 2019 16:00:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/7.3.10"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "private, must-revalidate"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1573142503"
+								},
+								{
+									"key": "ETag",
+									"value": "\"e8f130ba184f0537920d2ffa489884e9b098f802\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"水果套餐\",\n        \"price\": 20,\n        \"photo\": \"http://localhost/storage/uploads/images/commodities/201911/06/1_1573022679_7sR2dpEDxX.jpg\",\n        \"description\": \"单位每斤\"\n    }\n}"
+						}
+					]
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -1103,6 +1240,56 @@
 							"body": null
 						}
 					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Feedback",
+			"item": [
+				{
+					"name": "反馈接口",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3QiLCJpYXQiOjE1NzMxNDI1MjAsImV4cCI6MTU3MzIyODkyMCwibmJmIjoxNTczMTQyNTIwLCJqdGkiOiJ3Y1puMjRZV1hLQzFXNmNHIiwic3ViIjoxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.oSWHEWJBrgUWdHTmh912oWM3qDq0IIgW57cfeL8mnTs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"contact\": \"1003132577\",\n\t\"content\": \"水果太难吃了，呕！\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/feedback",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"feedback"
+							]
+						},
+						"description": "请求此接口以提交反馈，必须包含Authorizations头。"
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}

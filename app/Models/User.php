@@ -93,4 +93,14 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany('App\Models\Order', 'user_id');
     }
+
+    /**
+     * 定义用户与反馈关系
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function feedback()
+    {
+        return $this->hasMany('App\Models\Feedback', 'user_id');
+    }
 }

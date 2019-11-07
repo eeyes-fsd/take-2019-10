@@ -84,6 +84,10 @@ $api->version('v1', [
                 ->name('api.orders.delete');
             $api->get('orders/{order}/callback', 'OrdersController@callback')
                 ->name('api.orders.callback');
+
+            /** 反馈接口 */
+            $api->post('feedback', 'FeedbackController@store')
+                ->name('api.feedback.store');
         });
     });
 });
